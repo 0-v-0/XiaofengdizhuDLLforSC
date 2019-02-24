@@ -63,7 +63,6 @@
     <Compile Include="Abandoned\Robot\ComponentRobotBehavior.cs" />
     <Compile Include="BlocksEntity\ComponentBlocksEntity.cs" />
     <Compile Include="BlocksEntity\SubsystemBlocksEntities.cs" />
-    <Compile Include="Common\StaticCommonMethod.cs" />
     <Compile Include="Factorio\BeltTransport\FactorioTransportBeltBlock.cs" />
     <Compile Include="Factorio\BeltTransport\SubsystemFactorioBeltTransportBLockBehavior.cs" />
     <Compile Include="MoreChest\AutoCollectPickablesHole\AutoCollectPickablesHoleBlock.cs" />
@@ -89,10 +88,6 @@
     <Compile Include="MoreLedBlocks\SixtyFourLedElectricElement.cs" />
     <Compile Include="MoreChest\CombinedChest\CombinedChestWidget.cs" />
     <Compile Include="MoreChest\CombinedChest\SubsystemCombinedChestBlockBehavior.cs" />
-    <Compile Include="Common\CommonMethod.cs" />
-    <Compile Include="Common\CommonSubsystems.cs" />
-    <Compile Include="Common\StoreBlock.cs" />
-    <Compile Include="Common\StoreBlocks.cs" />
     <Compile Include="Others\Bresenham3D.cs" />
     <Compile Include="Others\Maze.cs" />
     <Compile Include="Others\PlayGluttonousSnake.cs" />
@@ -100,20 +95,6 @@
     <Compile Include="Abandoned\Portal\SubsystemPortalBlockBehavior.cs" />
     <Compile Include="Abandoned\PlayTerraria\PlayTerrariaByOneLED.cs" />
     <Compile Include="Abandoned\PlayTerraria\SkillPlayTerrariaByOneLED.cs" />
-    <Compile Include="SkillSystem\Skills\SkillPlayBadApple\PlayBadAppleBy4LED.cs" />
-    <Compile Include="SkillSystem\Skills\SkillPlayBadApple\PlayBadAppleByPaintedClay.cs" />
-    <Compile Include="SkillSystem\Skills\SkillPlayBadApple\PlayBadAppleByTexturedBatch3D.cs" />
-    <Compile Include="SkillSystem\ComponentSkillInput.cs" />
-    <Compile Include="SkillSystem\Skill.cs" />
-    <Compile Include="SkillSystem\SkillManager.cs" />
-    <Compile Include="SkillSystem\Skills\SkillFireBall.cs" />
-    <Compile Include="SkillSystem\Skills\SkillGateofBabylon.cs" />
-    <Compile Include="SkillSystem\Skills\SkillPlayBadApple\SkillPlayBadApple3in1.cs" />
-    <Compile Include="SkillSystem\Skills\SkillPlayBadApple\SkillPlayBadAppleByTexturedBatch3D.cs" />
-    <Compile Include="SkillSystem\Skills\SkillPlayBadApple\SkillPlayBadAppleByPaintedClay.cs" />
-    <Compile Include="SkillSystem\Skills\SkillPlayBadApple\SkillPlayBadAppleBy4LED.cs" />
-    <Compile Include="SkillSystem\Skills\SkillPlayGluttonousSnake.cs" />
-    <Compile Include="SkillSystem\Skills\SkillTest.cs" />
     <Compile Include="Abandoned\TargetState\ComponentTargetState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Abandoned\TargetState\TargetStateWidget.cs" />
@@ -158,15 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Abandoned\PlayTerraria\TerrariaByOneLED.7z" />
-    <None Include="SkillSystem\Skills\readme.md" />
-    <None Include="SkillSystem\Skills\SkillPlayBadApple\ImagesAndWorld\BadApple.7z.001" />
-    <None Include="SkillSystem\Skills\SkillPlayBadApple\ImagesAndWorld\BadApple.7z.002" />
-    <None Include="SkillSystem\Skills\SkillPlayBadApple\ImagesAndWorld\BadApple.7z.003" />
-    <None Include="SkillSystem\Skills\SkillPlayBadApple\ImagesAndWorld\BadApple.7z.004" />
-    <None Include="SkillSystem\Skills\SkillPlayBadApple\ImagesAndWorld\BadApple.7z.005" />
-    <None Include="SkillSystem\Skills\SkillPlayBadApple\ImagesAndWorld\BadApple.7z.006" />
-    <None Include="SkillSystem\Skills\SkillPlayBadApple\ImagesAndWorld\BadApple.7z.007" />
-    <None Include="SkillSystem\Skills\SkillPlayBadApple\ImagesAndWorld\BadApple.7z.008" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

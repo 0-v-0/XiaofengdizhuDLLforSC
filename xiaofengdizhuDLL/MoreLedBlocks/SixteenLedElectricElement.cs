@@ -63,14 +63,7 @@ namespace Game
                 int num = (int)MathUtils.Round(m_voltage * 15f);
                 for (int i = 0; i < 4; i++)
                 {
-                    if ((num & 1 << i) != 0)
-                    {
-                        m_glowPoints[i].Color = m_color;
-                    }
-                    else
-                    {
-                        m_glowPoints[i].Color = Color.Transparent;
-                    }
+                    m_glowPoints[i].Color = (num & 1 << i) != 0 ? m_color : Color.Transparent;
                 }
             }
             return false;

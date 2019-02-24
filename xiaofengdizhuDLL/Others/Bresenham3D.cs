@@ -17,32 +17,11 @@ namespace Game
             dy = Ynew - startY;
             dz = Znew - startZ;
 
-            if (dx < 0)
-            {
-                x_inc = -1;
-            }
-            else
-            {
-                x_inc = 1;
-            }
+            x_inc = dx < 0 ? -1 : 1;
 
-            if (dy < 0)
-            {
-                y_inc = -1;
-            }
-            else
-            {
-                y_inc = 1;
-            }
+            y_inc = dy < 0 ? -1 : 1;
 
-            if (dz < 0)
-            {
-                z_inc = -1;
-            }
-            else
-            {
-                z_inc = 1;
-            }
+            z_inc = dz < 0 ? -1 : 1;
 
             Adx = Math.Abs(dx);
             Ady = Math.Abs(dy);

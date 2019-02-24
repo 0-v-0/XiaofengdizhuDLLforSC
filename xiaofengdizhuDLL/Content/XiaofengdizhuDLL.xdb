@@ -1,12 +1,17 @@
 <Mod Name="XiaofengdizhuDLL">
 <EntityTemplate Name="Player" Guid="4be6c1c5-d65d-4537-8a8b-a391969e6dc2">
-	<MemberComponentTemplate Name="SkillInput" Guid="15e5a7c3-b04e-4d95-8db4-2e7574adc4b9" InheritanceParent="84f93359-4e79-43ab-8cce-ff85a3ddedb3" />
 	<MemberComponentTemplate Name="FireflySurround" Guid="f7b98f0e-317f-4589-8033-ca605f92ee15" InheritanceParent="288816b9-23bd-4fb2-9a3b-ac78540b5e6b" />
 </EntityTemplate>
 <EntityTemplate Name="Creature" Guid="bc5be211-c1f8-4e50-9ffb-4fde625d2692">
 	<MemberComponentTemplate Name="DisplayHealthAndNameBehavior" Guid="9545c864-4364-45e6-bdbc-25326a6b28a7" InheritanceParent="e138cc15-930c-4805-8cfc-b91bfa7f7671" />
 	<MemberComponentTemplate Name="BreedBehavior" Guid="a545c864-4364-45e6-bdbc-25326a6b28a7" InheritanceParent="f138cc15-930c-4805-8cfc-b91bfa7f7671" />
 </EntityTemplate>
+<Folder Name="Entities" Guid="5fcdf35f-7001-442c-883e-e0502b15d291">
+	<EntityTemplate Name="CombinedChest" Guid="08560017-af17-4955-81fa-aafaf97b92bd">
+		<MemberComponentTemplate Name="CombinedChest" Guid="0f192a00-ac7d-4b42-97c7-df652ca11b51" InheritanceParent="8312ec8c-10c7-4133-85b4-4a35bd44c956" />
+		<MemberComponentTemplate Name="BlocksEntity" Guid="a1d72c3e-980d-461e-87ac-4358ed7d41b5" InheritanceParent="19a85cba-d94e-41b8-9497-f20ed942c17e" />
+	</EntityTemplate>
+</Folder>
 <ProjectTemplate Name="Project" Guid="85023bf8-1c90-4dd1-9442-e6c13691d078">
 	<MemberSubsystemTemplate Name="BlocksEntities" Guid="7bddfe21-5866-4fd2-9d6d-b023ec73a34c" InheritanceParent="dcd8d745-1802-4dc7-80ed-8e01712fe611" />
 	<MemberSubsystemTemplate Name="ExperienceOreBlockBehavior" Guid="997fdf9a-574e-434f-aae3-89bf53a00fd7" InheritanceParent="139ea51e-c41d-4c93-99ae-a9b5a491c7aa" />

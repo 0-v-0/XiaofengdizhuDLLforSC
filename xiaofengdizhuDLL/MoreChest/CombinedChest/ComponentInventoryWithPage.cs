@@ -210,10 +210,10 @@ namespace Game
             }
         }
 
-        protected List<Slot> m_slots = new List<Slot>();
+        public List<Slot> m_slots = new List<Slot>();
         public Random m_random = new Random();
 
-        protected class Slot
+        public class Slot
         {
             public int Value;
             public int Count;

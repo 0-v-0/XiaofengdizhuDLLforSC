@@ -68,7 +68,7 @@ namespace Game
                 }
                 else
                 {
-                    if (nowTime > m_lastSpawnTime + 0.1)
+                    if (nowTime > m_lastSpawnTime + 0.1 && m_fireFlies.Count > 0)
                     {
                         m_fireFlies.RemoveAt(0);
                     }

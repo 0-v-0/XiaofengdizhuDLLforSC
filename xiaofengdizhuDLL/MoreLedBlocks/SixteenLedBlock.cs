@@ -18,13 +18,11 @@ namespace Game
                 {
                     m = Matrix.CreateRotationX(1.57079637f) * Matrix.CreateTranslation(0f, 0f, -0.5f) * Matrix.CreateRotationY(i * 3.14159274f / 2f) * Matrix.CreateTranslation(0.5f, 0.5f, 0.5f);
                 }
-                else if (i == 4)
-                {
-                    m = Matrix.CreateTranslation(0.5f, 0f, 0.5f);
-                }
                 else
                 {
-                    m = Matrix.CreateRotationX(3.14159274f) * Matrix.CreateTranslation(0.5f, 1f, 0.5f);
+                    m = i == 4
+                        ? Matrix.CreateTranslation(0.5f, 0f, 0.5f)
+                        : Matrix.CreateRotationX(3.14159274f) * Matrix.CreateTranslation(0.5f, 1f, 0.5f);
                 }
                 m_blockMeshesByFace[i] = new BlockMesh();
                 m_blockMeshesByFace[i].AppendModelMeshPart(modelMesh.MeshParts[0], boneAbsoluteTransform * m, false, false, false, false, Color.White);

@@ -6,7 +6,7 @@ namespace Game
     {
         private Image[] m_pictures = new Image[79];
         public GlowPoint[] m_glowPoints;
-        public CommonMethod commonMethod = new CommonMethod();
+        //public CommonMethod commonMethod = new CommonMethod();
 
         public PlayTerrariaByOneLED()
         {

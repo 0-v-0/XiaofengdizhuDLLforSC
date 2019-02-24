@@ -9,13 +9,7 @@ namespace Game
 {
     public class ComponentBlocksEntity : Component
     {
-        private List<Point3> m_coordinates = new List<Point3>();
-
-        public List<Point3> Coordinates
-        {
-            get { return m_coordinates; }
-            set { m_coordinates = value; }
-        }
+        public List<Point3> Coordinates = new List<Point3>();
 
         public override void Load(ValuesDictionary valuesDictionary, IdToEntityMap idToEntityMap)
         {
@@ -26,7 +20,7 @@ namespace Game
                 {
                     string[] strings1 = strings[i].Split(',');
                     if (strings1.Length == 3)
-                        m_coordinates.Add(new Point3(int.Parse(strings1[0]), int.Parse(strings1[1]), int.Parse(strings1[2])));
+                        Coordinates.Add(new Point3(int.Parse(strings1[0]), int.Parse(strings1[1]), int.Parse(strings1[2])));
                 }
             }
             catch (Exception e)

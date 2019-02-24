@@ -15,7 +15,7 @@ namespace Game
         private bool[,] m_layerSnakeHead;
         private Color[,] m_layerOutput;
         public bool m_stop = false;
-        private CommonMethod commonMethod = new CommonMethod();
+        //private CommonMethod commonMethod = new CommonMethod();
 
         public enum SnakeType
         {
@@ -138,7 +138,7 @@ namespace Game
                 {
                     return Up;
                 }
-                else return Zero;
+                return Zero;
             }
 
             public Point TurnLeft()
@@ -159,7 +159,7 @@ namespace Game
                 {
                     return Down;
                 }
-                else return Zero;
+                return Zero;
             }
         }
 
@@ -250,30 +250,17 @@ namespace Game
                 }
                 if (playerIndex > -1)
                 {
-                    if (playerIndex >= commonMethod.componentPlayers.Count) continue;
+                    var cp = GameManager.Project.FindSubsystem<SubsystemPlayers>(true).ComponentPlayers;
+                    if (playerIndex >= cp.Count) continue;
                     Point direction = snake.Direction;
-                    Vector3 vector3 = commonMethod.componentPlayers[playerIndex].ComponentInput.PlayerInput.Move;
+                    Vector3 vector3 = cp[playerIndex].ComponentInput.PlayerInput.Move;
                     if (vector3.X > vector3.Z)
                     {
-                        if (vector3.X > 0)
-                        {
-                            direction = Point.Right;
-                        }
-                        else
-                        {
-                            direction = Point.Down;
-                        }
+                        direction = vector3.X > 0 ? Point.Right : Point.Down;
                     }
                     else if (vector3.X < vector3.Z)
                     {
-                        if (vector3.Z > 0)
-                        {
-                            direction = Point.Up;
-                        }
-                        else
-                        {
-                            direction = Point.Left;
-                        }
+                        direction = vector3.Z > 0 ? Point.Up : Point.Left;
                     }
                     if (direction != snake.LastDirection && direction != -snake.LastDirection)
                     {
@@ -321,14 +308,9 @@ namespace Game
                     else if (triedTimes == 0)
                     {
                         triedTimes++;
-                        if (fruitDirection == snake.LastDirection || fruitDirection == snake.LastDirection.TurnLeft())
-                        {
-                            direction = snake.LastDirection.TurnRight();
-                        }
-                        else
-                        {
-                            direction = snake.LastDirection.TurnLeft();
-                        }
+                        direction = fruitDirection == snake.LastDirection || fruitDirection == snake.LastDirection.TurnLeft()
+                            ? snake.LastDirection.TurnRight()
+                            : snake.LastDirection.TurnLeft();
                         nextPosition = snake.Head + direction;
                     }
                     else if (triedTimes == 1)
@@ -345,14 +327,7 @@ namespace Game
                         nextPosition = snake.Head + direction;
                     }
                 }
-                if (direction == Point.Zero || direction == -snake.LastDirection)
-                {
-                    snake.Direction = snake.LastDirection;
-                }
-                else
-                {
-                    snake.Direction = direction;
-                }
+                snake.Direction = direction == Point.Zero || direction == -snake.LastDirection ? snake.LastDirection : direction;
             }
         }
 
