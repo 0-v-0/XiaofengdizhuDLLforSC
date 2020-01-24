@@ -318,7 +318,31 @@ namespace Game
             }
         }
 
-        public void Draw(Camera camera, int drawOrder)
+		public override void OnHitByProjectile(CellFace cellFace, WorldItem worldItem)
+		{
+			if (m_blocks.ContainsKey(cellFace.Point))
+			{
+				int i = 0;
+				for(; i < 5; i++)
+				{
+					var items = m_blocks[cellFace.Point].items;
+					if (items[0, i].value == 0)
+					{
+						items[0, i] = new Item(worldItem.Value);
+						break;
+					}
+					else if(items[1, i].value == 0)
+					{
+						items[1, i] = new Item(worldItem.Value);
+						break;
+					}
+				}
+				if (i != 5)
+					worldItem.ToRemove = true;
+			}
+		}
+
+		public void Draw(Camera camera, int drawOrder)
         {
             try
             {
@@ -368,10 +392,9 @@ namespace Game
                                 for (int process = 4; process >= 0; process--)
                                 {
                                     Item item = block.items[side, process];
-                                    if (item.value > 0)
+                                    if (item.value != 0)
                                     {
-                                        Block itemBlock = BlocksManager.Blocks[Terrain.ExtractContents(item.value)];
-                                        Point3 direction = FactorioTransportBeltBlock.RotationToDirection(FTB.rotation);
+										Point3 direction = FactorioTransportBeltBlock.RotationToDirection(FTB.rotation);
                                         var matrix = new Matrix(1f, 0f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1f, 0f, FTBdisplayPosition.X, FTBdisplayPosition.Y, FTBdisplayPosition.Z, 1f);
                                         if (FTB.cornerType.HasValue && process < 4)
                                         {
@@ -398,11 +421,10 @@ namespace Game
                                             {
                                                 matrix.M42 += 0.25f;
                                             }
-                                            var v3Direction = new Vector3(direction);
-                                            matrix.Translation += (process * 0.25f - 0.5f + (item.stop || block.justAddedItem.Contains(side * 5 + process) ? 0 : (m_drawedTime[2] % m_colorDrawScale[FTB.color] * 0.25f / m_colorDrawScale[FTB.color]))) * v3Direction + (side == 1 ? 0.15f : (-0.15f)) * new Vector3(FactorioTransportBeltBlock.RotationToDirection(TurnRight(FTB.rotation)));
+											matrix.Translation += (process * 0.25f - 0.5f + (item.stop || block.justAddedItem.Contains(side * 5 + process) ? 0 : (m_drawedTime[2] % m_colorDrawScale[FTB.color] * 0.25f / m_colorDrawScale[FTB.color]))) * new Vector3(direction) + (side == 1 ? 0.15f : (-0.15f)) * new Vector3(FactorioTransportBeltBlock.RotationToDirection(TurnRight(FTB.rotation)));
                                         }
-                                        itemBlock.DrawBlock(m_primitivesRenderer, item.value, Color.White, 0.18f, ref matrix, m_drawBlockEnvironmentData);
-                                        if (m_drawedTime[FTB.color] % 4 == 3 && m_drawedTime[3] == 3)
+										BlocksManager.Blocks[Terrain.ExtractContents(item.value)].DrawBlock(m_primitivesRenderer, item.value, Color.White, 0.18f, ref matrix, m_drawBlockEnvironmentData);
+                                        if ((m_drawedTime[FTB.color] & 3) == 3 && m_drawedTime[3] == 3)
                                         {
                                             item.stop = false;
                                             if (process >= 3)
@@ -507,8 +529,9 @@ namespace Game
                                             }
                                             else
                                             {
-                                                Log.Information(block.justAddedItem.Contains(side * 5 + process));
-                                                block.items[side, process].stop = true;
+												//Log.Information(block.justAddedItem.Contains(side * 5 + process));
+												SubsystemTerrain.m_subsystemPickables.AddPickable(block.items[side, process].value, 0, new Vector3(FTB.position), null, null);
+												block.items[side, process].stop = true;
                                             }
                                         }
                                     }
@@ -589,7 +612,7 @@ namespace Game
             }
             catch (Exception e)
             {
-                Log.Warning(e.ToString());
+                Log.Warning(e);
             }
         }
 
@@ -777,8 +800,8 @@ namespace Game
             {
                 FTB = ftb;
                 drawIndex = DrawIndex;
-                items[0, 0] = new Item(9);
-                items[1, 1] = new Item(10);
+                //items[0, 0] = new Item(9);
+                //items[1, 1] = new Item(10);
             }
 
             public FTBandItems(FactorioTransportBelt ftb, Item[,] itemss)

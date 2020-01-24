@@ -30,7 +30,7 @@ namespace Game
             m_subsystemWeather = Project.FindSubsystem<SubsystemWeather>(true);
             m_subsystemTerrain = Project.FindSubsystem<SubsystemTerrain>(true);
             m_subsystemGameInfo = Project.FindSubsystem<SubsystemGameInfo>(true);
-            m_texture = ContentManager.Get<Texture2D>("Textures/Round32");
+            m_texture = ContentManager.Get<Texture2D>("Textures/Sun");
             m_primitivesRenderer = Project.FindSubsystem<SubsystemModelsRenderer>(true).PrimitivesRenderer;
             isLivingMode = m_subsystemGameInfo.WorldSettings.EnvironmentBehaviorMode == EnvironmentBehaviorMode.Living;
         }

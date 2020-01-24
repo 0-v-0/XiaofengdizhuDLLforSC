@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Game
 {
-    public class FactorioTransportBeltBlock : Block
+    public class FactorioTransportBeltBlock : FlatBlock
     {
         public const int Index = 400;
         public Texture2D[] m_textures;
@@ -54,10 +54,10 @@ namespace Game
             }
         }
 
-        public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
+        /*public override void GenerateTerrainVertices(BlockGeometryGenerator generator, TerrainGeometrySubsets geometry, int value, int x, int y, int z)
         {
             //generator.GenerateCubeVertices(this, value, x, y, z, 0.009f, 0.009f, 0.009f, 0.009f, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, Color.Transparent, -1, geometry.OpaqueSubsetsByFace);
-        }
+        }*/
 
         public override void DrawBlock(PrimitivesRenderer3D primitivesRenderer, int value, Color color, float size, ref Matrix matrix, DrawBlockEnvironmentData environmentData)
         {
@@ -71,12 +71,7 @@ namespace Game
 
         public override IEnumerable<int> GetCreativeValues()
         {
-            yield return Terrain.MakeBlockValue(BlockIndex, 0, SetColor(0, 0));
-            for (int i = 1; i < 3; i++)
-            {
-                yield return Terrain.MakeBlockValue(BlockIndex, 0, SetColor(0, i));
-            }
-            yield break;
+			return new[] { Terrain.ReplaceData(BlockIndex, SetColor(0, 0)), Terrain.ReplaceData(BlockIndex, SetColor(0, 1)), Terrain.ReplaceData(BlockIndex, SetColor(0, 2)) };
         }
 
         public override string GetDisplayName(SubsystemTerrain subsystemTerrain, int value)
@@ -156,46 +151,30 @@ namespace Game
 
         public static bool? GetSlopeType(int data)
         {
-            if ((data & 4) != 0)
-            {
-                return new bool?((data & 512) != 0);
+			return (data & 4) != 0 ? new bool?((data & 512) != 0) : null;
             }
-            return null;
-        }
 
         public static int SetSlopeType(int data, bool? slopeType)
         {
-            if (slopeType != null)
-            {
-                return (data & -513) | 4 | (slopeType.Value ? 1 : 0) << 9;
-            }
-            return data & -5;
+			return slopeType != null ? (data & -513) | 4 | (slopeType.Value ? 1 : 0) << 9 : data & -5;
         }
 
         public static int? GetCornerType(int data)
         {
-            if ((data & 32) != 0)
-            {
-                return data >> 6 & 7;
-            }
-            return null;
+			return (data & 32) != 0 ? data >> 6 & 7 : (int?)null;
         }
 
         public static int SetCornerType(int data, int? cornertype)
         {
-            if (cornertype != null)
-            {
-                return (data & -481) | 32 | (cornertype.Value & 7) << 6;
-            }
-            return data & -481;
+			return cornertype != null ? (data & -481) | 32 | (cornertype.Value & 7) << 6 : data & -481;
         }
 
-        public enum CornerType
+        /*public enum CornerType
         {
             None,
             OneQuarter,
             ThreeQuarters
-        }
+        }*/
 
         public static int m_texRowCount = 12;
         public static int m_texColCount = 16;
